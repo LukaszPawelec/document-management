@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pl.com.bottega.documentmanagement.api.DocumentFlowProcess;
 import pl.com.bottega.documentmanagement.api.UserManager;
+import pl.com.bottega.documentmanagement.domain.DocumentNumber;
 import pl.com.bottega.documentmanagement.domain.EmployeeId;
 
 /**
@@ -16,6 +17,7 @@ public class CreateDocumentProcess {
         userManager.signup("Janusz", "12345", new EmployeeId(1));
         userManager.login("Janusz", "12345");
         DocumentFlowProcess documentFlowProcess = applicationContext.getBean("documentFlowProcess", DocumentFlowProcess.class);
-        documentFlowProcess.create("My first doc", "Ple ple ple");
+        DocumentNumber number = documentFlowProcess.create("My first doc", "Ple ple ple");
+        System.out.println(number);
     }
 }

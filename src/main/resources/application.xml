@@ -36,7 +36,10 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <bean id="userManager" class="pl.com.bottega.documentmanagement.api.UserManager">
+    <context:property-placeholder location="classpath:application.properties"/>
+    <bean id="documentNumberGenerator" class="pl.com.bottega.documentmanagement.domain.ISODocumentNumberGenerator"></bean>
+
+    <!--bean id="userManager" class="pl.com.bottega.documentmanagement.api.UserManager">
         <constructor-arg index="0" ref="employeeRepository" />
     </bean>
 
@@ -53,6 +56,6 @@
         <constructor-arg index="0" ref="documentRepository" />
         <constructor-arg index="1" ref="userManager" />
         <constructor-arg index="2" ref="documentNumberGenerator" />
-    </bean>
+    </bean> -->
 
 </beans>
