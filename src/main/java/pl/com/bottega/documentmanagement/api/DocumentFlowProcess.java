@@ -17,6 +17,13 @@ public class DocumentFlowProcess {
     private DocumentRepository documentRepository;
     private UserManager userManager;
 
+    public DocumentFlowProcess(DocumentRepository documentRepository, UserManager userManager, DocumentNumberGenerator documentNumberGenerator){
+        this.documentRepository = documentRepository;
+        this.userManager = userManager;
+        this.documentNumberGenerator = documentNumberGenerator;
+    }
+
+
     public DocumentNumber create(String title, String content) {
         checkNotNull(title);
         checkNotNull(content);

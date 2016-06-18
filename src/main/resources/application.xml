@@ -36,4 +36,23 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
+    <bean id="userManager" class="pl.com.bottega.documentmanagement.api.UserManager">
+        <constructor-arg index="0" ref="employeeRepository" />
+    </bean>
+
+    <bean id="employeeRepository" class="pl.com.bottega.documentmanagement.infrastructure.FakeEmployeeRepository">
+    </bean>
+
+    <bean id="documentRepository" class="pl.com.bottega.documentmanagement.infrastructure.FakeDocumentRepository">
+    </bean>
+
+    <bean id="documentNumberGenerator" class="pl.com.bottega.documentmanagement.domain.ISODocumentRepository">
+    </bean>
+
+    <bean id="documentFlowProcess" class="pl.com.bottega.documentmanagement.api.DocumentFlowProcess">
+        <constructor-arg index="0" ref="documentRepository" />
+        <constructor-arg index="1" ref="userManager" />
+        <constructor-arg index="2" ref="documentNumberGenerator" />
+    </bean>
+
 </beans>

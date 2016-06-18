@@ -13,6 +13,10 @@ public class UserManager {
 
     private EmployeeRepository employeeRepository;
 
+    public UserManager(EmployeeRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
+    }
+
     public SignupResultDto signup(String login, String password, EmployeeId employeeId) {
         Employee employee = employeeRepository.findByEmployeeId(employeeId);
         if(employee == null)
