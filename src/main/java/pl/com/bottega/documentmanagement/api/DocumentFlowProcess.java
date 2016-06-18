@@ -4,12 +4,12 @@ import pl.com.bottega.documentmanagement.domain.Document;
 import pl.com.bottega.documentmanagement.domain.DocumentNumber;
 import pl.com.bottega.documentmanagement.domain.DocumentNumberGenerator;
 import pl.com.bottega.documentmanagement.domain.EmployeeId;
-import pl.com.bottega.documentmanagement.domain.Repositories.DocumentRepository;
+import pl.com.bottega.documentmanagement.domain.repositories.DocumentRepository;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Created by Nizari on 12.06.2016.
+ * Created by maciuch on 12.06.16.
  */
 public class DocumentFlowProcess {
 
@@ -25,7 +25,7 @@ public class DocumentFlowProcess {
         Document document = new Document(documentNumber, title, content);
         documentRepository.save(document);
 
-        return null;
+        return documentNumber;
     }
 
     public void change(DocumentNumber documentNumber, String newTitle, String newContent) {
@@ -36,7 +36,6 @@ public class DocumentFlowProcess {
         Document document = documentRepository.load(documentNumber);
         document.change(newTitle, newContent);
         documentRepository.save(document);
-
     }
 
     public void verify(DocumentNumber documentNumber) {
@@ -45,34 +44,20 @@ public class DocumentFlowProcess {
         Document document = documentRepository.load(documentNumber);
         document.verify(userManager.currentEmployee());
         documentRepository.save(document);
-
     }
 
-    public void publish(DocumentNumber documentNumber, Iterable<EmployeeId> employeeId) {
+    public void publish(DocumentNumber documentNumber, Iterable<EmployeeId> ids) {
         checkNotNull(documentNumber);
-
-        Document document = documentRepository.load(documentNumber);
-        document.publish(userManager.currentEmployee());
-        documentRepository.save(document);
-
     }
 
     public void archive(DocumentNumber documentNumber) {
         checkNotNull(documentNumber);
-
-        Document document = documentRepository.load(documentNumber);
-        document.archive(userManager.currentEmployee());
-        documentRepository.save(document);
-
     }
 
     public DocumentNumber createNewVersion(DocumentNumber documentNumber) {
         checkNotNull(documentNumber);
 
-        Document document = documentRepository.load(documentNumber);
-        document.createNewVersion(documentNumber);
-        documentRepository.save(document);
-
         return null;
     }
+
 }
