@@ -14,7 +14,7 @@ public class CreateDocumentProcess {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[] {"application.xml"}); //przekazujemy kontrole stringowi nad tworzeniem calego grafu obiektu
         UserManager userManager = applicationContext.getBean("userManager", UserManager.class);
-        userManager.signup("Janusz", "12345", new EmployeeId(1));
+        userManager.signup("Janusz", "12345", new EmployeeId(1l));
         userManager.login("Janusz", "12345");
         DocumentFlowProcess documentFlowProcess = applicationContext.getBean("documentFlowProcess", DocumentFlowProcess.class);
         DocumentNumber number = documentFlowProcess.create("My first doc", "Ple ple ple");
