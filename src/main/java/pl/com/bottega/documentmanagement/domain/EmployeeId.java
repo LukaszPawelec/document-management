@@ -3,12 +3,13 @@ package pl.com.bottega.documentmanagement.domain;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created by maciuch on 12.06.16.
  */
 @Embeddable
-public class EmployeeId {
+public class EmployeeId implements Serializable{
 
     @Id
     @GeneratedValue
@@ -16,7 +17,7 @@ public class EmployeeId {
 
     private EmployeeId() {}
 
-    public EmployeeId(long id) {
+    public EmployeeId(Long id) {
         this.id = id;
     }
 }
