@@ -1,5 +1,7 @@
 package pl.com.bottega.documentmanagement.domain;
 
+import javax.persistence.EmbeddedId;
+
 import static com.google.common.base.Preconditions.checkState;
 
 /**
@@ -7,9 +9,12 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class Employee {
 
+    @EmbeddedId
     private String login;
     private String hashedPassword;
     private EmployeeId employeeId;
+
+    private Employee() {}
 
     public Employee(String login, String hashedPassword, EmployeeId employeeId) {
         this.login = login;
