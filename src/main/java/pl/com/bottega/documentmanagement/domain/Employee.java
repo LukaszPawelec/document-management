@@ -11,10 +11,10 @@ import static com.google.common.base.Preconditions.checkState;
 @Entity
 public class Employee {
 
-    private String login;
-    private String hashedPassword;
     @EmbeddedId
     private EmployeeId employeeId;
+    private String hashedPassword;
+    private String login;
 
     private Employee() {}
 
@@ -28,9 +28,10 @@ public class Employee {
         return login != null;
     }
 
-    public void setupAccount(String login, String password) { //upgradeujemy wykluczonego by mial konto
-        checkState(!isRegistered()); //checkstate to z guavy (gwoli przypomnienia)
+    public void setupAccount(String login, String password) {
+        checkState(!isRegistered());
         this.login = login;
         this.hashedPassword = password;
     }
+
 }

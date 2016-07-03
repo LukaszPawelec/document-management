@@ -1,7 +1,7 @@
 package pl.com.bottega.documentmanagement.api;
 
 /**
- * Created by Nizari on 18.06.2016.
+ * Created by maciuch on 18.06.16.
  */
 public class SignupResultDto {
 
@@ -32,4 +32,13 @@ public class SignupResultDto {
         this.failureReason = failureReason;
         success = false;
     }
+
+    @Override
+    public String toString() {
+        return "SignupResultDto{" +
+                "success=" + success +
+                ", failureReason='" + failureReason + '\'' +
+                '}';
+    }
+
 }

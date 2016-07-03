@@ -2,11 +2,12 @@ package pl.com.bottega.documentmanagement.api;
 
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.documentmanagement.domain.Employee;
 import pl.com.bottega.documentmanagement.domain.EmployeeId;
-import pl.com.bottega.documentmanagement.domain.repositories.EmployeeRepository;
+import pl.com.bottega.documentmanagement.domain.EmployeeRepository;
 
 /**
  * Created by Nizari on 18.06.16.
@@ -17,17 +18,17 @@ public class UserManager {
     private EmployeeRepository employeeRepository;
     private Employee currentEmployee;
 
-    public UserManager(EmployeeRepository employeeRepository){
+    public UserManager(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
     @Transactional
     public SignupResultDto signup(String login, String password, EmployeeId employeeId) {
         Employee employee = employeeRepository.findByEmployeeId(employeeId);
-        if(employee == null)
+        if (employee == null)
             return setupNewAccount(login, password, employeeId);
         else if (employee.isRegistered())
-            return failed("Employee is already registered");
+            return failed("employee registered");
         else {
             employee.setupAccount(login, password);
             employeeRepository.save(employee);
@@ -35,10 +36,9 @@ public class UserManager {
         }
     }
 
-    @Transactional
     private SignupResultDto setupNewAccount(String login, String password, EmployeeId employeeId) {
-        if(employeeRepository.isLoginOccupied(login))
-            return failed("Login is occupied");
+        if (employeeRepository.isLoginOccupied(login))
+            return failed("login is occupied");
         else {
             Employee employee = new Employee(login, hashedPassword(password), employeeId);
             employeeRepository.save(employee);
@@ -55,11 +55,11 @@ public class UserManager {
     }
 
     private String hashedPassword(String password) {
-        return Hashing.sha1().hashString(password,Charsets.UTF_8).toString();
+        return Hashing.sha1().hashString(password, Charsets.UTF_8).toString();
     }
 
-    public SignupResultDto login(String login, String password){
-        this.currentEmployee = employeeRepository.findByLogInAndPassword(login, hashedPassword(password));
+    public SignupResultDto login(String login, String password) {
+        this.currentEmployee = employeeRepository.findByLoginAndPassword(login, hashedPassword(password));
         if(this.currentEmployee == null)
             return failed("login or password incorrect");
         else
