@@ -17,9 +17,6 @@ public class JPAEmployeeRepository implements EmployeeRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public JPAEmployeeRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public void save(Employee employee) {
@@ -41,5 +38,15 @@ public class JPAEmployeeRepository implements EmployeeRepository {
                         Long.class).
                 setParameter("login", login).
                 getSingleResult() > 0;
+    }
+
+    @Override
+    public Employee findByLogInAndPassword(String login, String hashedPassword) {
+        return entityManager.createQuery("FROM Employee " +
+                "WHERE login=:login AND hashedPassword=:hashedPassword",
+                Employee.class).
+                setParameter("login", login).
+                setParameter("hashedPassword", hashedPassword).
+                getSingleResult();
     }
 }

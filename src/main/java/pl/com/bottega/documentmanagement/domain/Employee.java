@@ -11,9 +11,9 @@ import static com.google.common.base.Preconditions.checkState;
 @Entity
 public class Employee {
 
-    @EmbeddedId
     private String login;
     private String hashedPassword;
+    @EmbeddedId
     private EmployeeId employeeId;
 
     private Employee() {}
