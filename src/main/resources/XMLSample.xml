@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<Document>
+    <title>tytuł 1</title>
+    <content>zawartość ple ple ple</content>
+    <Employee>
+        <name>janek</name>
+        <lastname>kowalski</lastname>
+        <address>ul. Lipowa</address>
+        <telephonenumber>500600500</telephonenumber>
+    </Employee>
+</Document>

@@ -42,7 +42,7 @@ public class JPAEmployeeRepository implements EmployeeRepository {
     public Employee findByLoginAndPassword(String login, String hashedPassword) {
         return entityManager.
                 createQuery("FROM Employee " +
-                        "WHERE login=:login AND hashedPassword=:pwd",
+                                "WHERE login=:login AND hashedPassword=:pwd",
                         Employee.class).
                 setParameter("login", login).
                 setParameter("pwd", hashedPassword).

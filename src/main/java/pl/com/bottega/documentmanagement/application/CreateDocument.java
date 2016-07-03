@@ -9,7 +9,7 @@ import pl.com.bottega.documentmanagement.domain.DocumentNumber;
 import pl.com.bottega.documentmanagement.domain.EmployeeId;
 
 /**
- * Created by maciuch on 18.06.16.
+ * Created by Nizari on 18.06.16.
  */
 public class CreateDocument {
 

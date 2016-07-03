@@ -1,0 +1,12 @@
+{
+  "Document": {
+    "title": "tytuł 1",
+    "content": "zawartość ple ple ple",
+    "Employee": {
+      "name": "janek",
+      "lastName": "kowalski",
+      "address": "ul. Lipowa",
+      "telephoneNumber": "500600500"
+    }
+  }
+}
