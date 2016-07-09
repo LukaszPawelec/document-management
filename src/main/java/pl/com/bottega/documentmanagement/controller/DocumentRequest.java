@@ -1,7 +1,7 @@
 package pl.com.bottega.documentmanagement.controller;
 
 /**
- * Created by Nizari on 03.07.2016.
+ * Created by maciuch on 03.07.16.
  */
 public class DocumentRequest {
 
@@ -9,19 +9,19 @@ public class DocumentRequest {
     private String content;
 
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

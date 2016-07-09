@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.documentmanagement.domain.Employee;
 import pl.com.bottega.documentmanagement.domain.EmployeeId;
-import pl.com.bottega.documentmanagement.domain.EmployeeRepository;
+import pl.com.bottega.documentmanagement.domain.repositories.EmployeeRepository;
 
 /**
  * Created by Nizari on 18.06.16.

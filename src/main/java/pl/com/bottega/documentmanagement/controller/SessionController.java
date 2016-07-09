@@ -8,7 +8,7 @@ import pl.com.bottega.documentmanagement.api.SignupResultDto;
 import pl.com.bottega.documentmanagement.api.UserManager;
 
 /**
- * Created by Nizari on 03.07.2016.
+ * Created by maciuch on 03.07.16.
  */
 @RestController
 @RequestMapping("/session")

@@ -4,7 +4,7 @@ import pl.com.bottega.documentmanagement.domain.Employee;
 import pl.com.bottega.documentmanagement.domain.EmployeeId;
 
 /**
- * Created by Nizari on 18.06.2016.
+ * Created by maciuch on 18.06.16.
  */
 public interface EmployeeRepository {
 
@@ -14,5 +14,5 @@ public interface EmployeeRepository {
 
     boolean isLoginOccupied(String login);
 
-    Employee findByLogInAndPassword(String login, String password);
+    Employee findByLoginAndPassword(String login, String hashedPassword);
 }
