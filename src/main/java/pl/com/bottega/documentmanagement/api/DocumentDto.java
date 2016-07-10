@@ -1,5 +1,7 @@
 package pl.com.bottega.documentmanagement.api;
 
+import java.util.Date;
+
 /**
  * Created by maciuch on 12.06.16.
  */
@@ -9,6 +11,18 @@ public class DocumentDto {
     private String title;
     private String content;
     private String status;
+    private Long creatorId, verificatorId;
+    private Date createdAt, verifiedAt, updatedAt;
+
+    public DocumentDto(String number, String title, String content, String status, Date createdAt, Date verifiedAt, Date updatedAt) {
+        this.number = number;
+        this.title = title;
+        this.content = content;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.verifiedAt = verifiedAt;
+        this.updatedAt = updatedAt;
+    }
 
     public String getNumber() {
         return number;
@@ -41,4 +55,5 @@ public class DocumentDto {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }

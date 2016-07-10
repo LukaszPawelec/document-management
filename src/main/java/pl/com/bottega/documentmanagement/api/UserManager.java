@@ -62,7 +62,7 @@ public class UserManager {
 
     public SignupResultDto login(String login, String password) {
         this.currentEmployee = employeeRepository.findByLoginAndPassword(login, hashedPassword(password));
-        if(this.currentEmployee == null)
+        if (this.currentEmployee == null)
             return failed("Login or password incorrect");
         else
             return success();

@@ -17,7 +17,7 @@ public class AuthAspect {
     }
 
     public void checkAuth() {
-        if(!userManager.isAuthenticated())
+        if (!userManager.isAuthenticated())
             throw new AuthRequiredException();
     }
 }
