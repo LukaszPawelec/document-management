@@ -5,13 +5,14 @@ import com.google.common.hash.Hashing;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.documentmanagement.domain.Employee;
 import pl.com.bottega.documentmanagement.domain.EmployeeId;
 import pl.com.bottega.documentmanagement.domain.repositories.EmployeeRepository;
 
 /**
- * Created by Nizari on 18.06.16.
+ * Created by Nizari on 12.06.16.
  */
 @Service
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -24,13 +25,13 @@ public class UserManager {
         this.employeeRepository = employeeRepository;
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public SignupResultDto signup(String login, String password, EmployeeId employeeId) {
         Employee employee = employeeRepository.findByEmployeeId(employeeId);
         if (employee == null)
             return setupNewAccount(login, password, employeeId);
         else if (employee.isRegistered())
-            return failed("Employee registered");
+            return failed("employee registered");
         else {
             employee.setupAccount(login, password);
             employeeRepository.save(employee);
@@ -40,7 +41,7 @@ public class UserManager {
 
     private SignupResultDto setupNewAccount(String login, String password, EmployeeId employeeId) {
         if (employeeRepository.isLoginOccupied(login))
-            return failed("Login is occupied");
+            return failed("login is occupied");
         else {
             Employee employee = new Employee(login, hashedPassword(password), employeeId);
             employeeRepository.save(employee);
@@ -62,8 +63,8 @@ public class UserManager {
 
     public SignupResultDto login(String login, String password) {
         this.currentEmployee = employeeRepository.findByLoginAndPassword(login, hashedPassword(password));
-        if (this.currentEmployee == null)
-            return failed("Login or password incorrect");
+        if(this.currentEmployee == null)
+            return failed("login or password incorrect");
         else
             return success();
     }

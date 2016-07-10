@@ -14,14 +14,15 @@ public class Document {
     @Id
     @GeneratedValue
     private Long id;
+
     private DocumentNumber documentNumber;
+
     private String content;
+
     private String title;
 
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdAt;
-    private Date updateAt;
-    private Date verifiedAt;
+    private Date createdAt, verifiedAt, updateAt;
 
     @Enumerated(EnumType.STRING)
     private DocumentStatus status;
