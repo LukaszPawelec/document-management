@@ -49,7 +49,8 @@ public class JPAEmployeeRepository implements EmployeeRepository {
     @Override
     public Employee findByLoginAndPassword(String login, String hashedPassword) {
         List<Employee> employees = entityManager.
-                createQuery("FROM Employee " +
+                createQuery("SELECT count(e) " +
+                                "FROM Employee e " +
                                 "WHERE login=:login AND hashedPassword=:pwd",
                         Employee.class).
                 setParameter("login", login).

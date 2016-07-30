@@ -32,7 +32,7 @@ public class JPQLDocumentsCatalog implements DocumentsCatalog {
                 "d.title, d.content," +
                 "d.status, d.createdAt, d.verifiedAt, d.updatedAt," +
                 "d.creator.employeeId.id, d.verificator.employeeId.id) " +
-                "from Document d where d.documentNumber=:documentNumber " +
+                "FROM Document d WHERE d.documentNumber=:documentNumber " +
                 "AND d.deleted = false";
         Query query = entityManager.createQuery(jpql);
         query.setParameter("documentNumber", documentNumber);

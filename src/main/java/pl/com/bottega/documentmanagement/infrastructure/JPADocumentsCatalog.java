@@ -84,7 +84,7 @@ public class JPADocumentsCatalog implements DocumentsCatalog {
     }
 
     private void applyNotDeleted(DocumentCriteria documentCriteria, CriteriaBuilder builder, Root<Document> root, Collection<Predicate> predicates) {
-        predicates.add(builder.not(root.get(Document_.deleted)));
+        predicates.add(builder.isFalse(root.get(Document_.deleted)));
     }
 
     private void applyQuery(DocumentCriteria documentCriteria, CriteriaBuilder builder, Root<Document> root, Collection<Predicate> predicates) {
