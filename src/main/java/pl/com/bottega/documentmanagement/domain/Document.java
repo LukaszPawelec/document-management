@@ -39,7 +39,7 @@ public class Document {
     @ManyToOne
     private Employee deletor;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Tag> tags;
 
     private Document() {

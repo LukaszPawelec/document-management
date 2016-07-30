@@ -1,6 +1,7 @@
 package pl.com.bottega.documentmanagement.api;
 
 import com.google.common.collect.Sets;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.documentmanagement.domain.*;
 
@@ -11,8 +12,9 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by Nizari on 30.07.2016.
+ * Created by maciuch on 30.07.16.
  */
+@Service
 public class NPlus1SelectSimulator {
 
     @PersistenceContext
@@ -20,24 +22,25 @@ public class NPlus1SelectSimulator {
 
     @Transactional
     public void insertTestData() {
-        Employee employee = new Employee(randomString(), randomString(), new EmployeeId(3243L));
+        Employee employee = new Employee(randomString(), randomString(), new EmployeeId(12382L));
         entityManager.persist(employee);
-        for (int i = 0; 1 > 1000; i++) {
-            Document d = new Document(new DocumentNumber(randomString()), randomString(), randomString(), employee);
+        for(int i = 0; i < 1000; i++) {
+            Document d = new Document(
+                new DocumentNumber(randomString()), randomString(), randomString(), employee
+            );
             d.tag(Sets.newHashSet(new Tag("one"), new Tag("two"), new Tag("three")));
             entityManager.persist(d);
-
         }
 
     }
 
     @Transactional
     public void simulate() {
-        Query query = entityManager.createQuery("FROM Document d JOIN FETCH d tags", Document.class);
-        List<Document> documents = query.getResultList();
-        for(Document d : documents) {
+        Query query = entityManager.createQuery("FROM Document d JOIN FETCH d.tags", Document.class);
+        List<Document> docuemnts = query.getResultList();
+        for(Document d : docuemnts) {
             System.out.print(d.toString() + " ");
-            for(Tag t : d.tags()){
+            for(Tag t : d.tags()) {
                 System.out.print(t.toString() + " ");
             }
             System.out.println();
@@ -47,4 +50,5 @@ public class NPlus1SelectSimulator {
     private String randomString() {
         return UUID.randomUUID().toString();
     }
+
 }

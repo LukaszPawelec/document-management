@@ -2,7 +2,6 @@ package pl.com.bottega.documentmanagement.infrastructure;
 
 import org.springframework.stereotype.Component;
 import pl.com.bottega.documentmanagement.api.*;
-import pl.com.bottega.documentmanagement.api.DocumentCriteria;
 import pl.com.bottega.documentmanagement.domain.*;
 
 import javax.persistence.EntityManager;
@@ -19,7 +18,7 @@ import java.util.HashSet;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Created by Radżesz on 12.06.16.
+ * Created by maciuch on 12.06.16.
  */
 @Component
 public class JPADocumentsCatalog implements DocumentsCatalog {
@@ -28,7 +27,7 @@ public class JPADocumentsCatalog implements DocumentsCatalog {
     private EntityManager entityManager;
 
     @Override
-    //@RequiresAuth(roles = "STAFF")
+    @RequiresAuth(roles = "STAFF")
     public DocumentDto get(DocumentNumber documentNumber) {
         checkNotNull(documentNumber);
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -65,7 +64,7 @@ public class JPADocumentsCatalog implements DocumentsCatalog {
         Root<Document> root = query.from(Document.class);
         selectDocumentDto(builder, query, root);
         applyCriteria(documentCriteria, builder, query, root);
-        
+
         CriteriaQuery<Long> countQuery = builder.createQuery(Long.class);
         Root<Document> countRoot = countQuery.from(Document.class);
         countQuery.select(builder.count(countRoot));
@@ -78,8 +77,11 @@ public class JPADocumentsCatalog implements DocumentsCatalog {
         jpaQuery.setFirstResult((int)first);
         jpaQuery.setMaxResults(documentCriteria.getPerPage().intValue());
 
-        return new DocumentSearchResults(jpaQuery.getResultList(), documentCriteria.getPerPage(), documentCriteria.getPageNumber(), (Long) jpaCountQuery.getSingleResult());
-
+        return new DocumentSearchResults(jpaQuery.getResultList(),
+                documentCriteria.getPerPage(),
+                documentCriteria.getPageNumber(),
+                (Long) jpaCountQuery.getSingleResult()
+                );
 
     }
 
@@ -98,7 +100,7 @@ public class JPADocumentsCatalog implements DocumentsCatalog {
     }
 
     private void applyNotDeleted(DocumentCriteria documentCriteria, CriteriaBuilder builder, Root<Document> root, Collection<Predicate> predicates) {
-        predicates.add(builder.isFalse(root.get(Document_.deleted)));
+        predicates.add(builder.not(root.get(Document_.deleted)));
     }
 
     private void applyQuery(DocumentCriteria documentCriteria, CriteriaBuilder builder, Root<Document> root, Collection<Predicate> predicates) {

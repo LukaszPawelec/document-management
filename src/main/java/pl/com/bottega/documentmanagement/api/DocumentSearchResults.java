@@ -1,7 +1,7 @@
 package pl.com.bottega.documentmanagement.api;
 
 /**
- * Created by Nizari on 30.07.2016.
+ * Created by maciuch on 30.07.16.
  */
 public class DocumentSearchResults {
 
@@ -13,7 +13,7 @@ public class DocumentSearchResults {
         this.documents = documents;
         this.perPage = perPage;
         this.pageNumber = pageNumber;
-        this.totalPages = totalResults / perPage + (totalResults % perPage > 0 ? 1 :0);
+        this.totalPages = totalResults / perPage + (totalResults % perPage > 0 ? 1 : 0);
     }
 
     public Iterable<DocumentDto> getDocuments() {
@@ -47,5 +47,4 @@ public class DocumentSearchResults {
     public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
-
 }

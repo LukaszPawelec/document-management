@@ -8,5 +8,5 @@ import pl.com.bottega.documentmanagement.domain.DocumentNumber;
 public interface DocumentsCatalog {
     DocumentDto get(DocumentNumber documentNumber);
 
-    DocumentSearchResults find(pl.com.bottega.documentmanagement.api.DocumentCriteria documentCriteria);
+    DocumentSearchResults find(DocumentCriteria documentCriteria);
 }

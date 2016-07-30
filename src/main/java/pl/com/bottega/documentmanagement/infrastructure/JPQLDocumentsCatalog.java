@@ -1,5 +1,6 @@
 package pl.com.bottega.documentmanagement.infrastructure;
 
+import org.springframework.stereotype.Component;
 import pl.com.bottega.documentmanagement.api.DocumentCriteria;
 import pl.com.bottega.documentmanagement.api.DocumentDto;
 import pl.com.bottega.documentmanagement.api.DocumentSearchResults;
@@ -32,7 +33,7 @@ public class JPQLDocumentsCatalog implements DocumentsCatalog {
                 "d.title, d.content," +
                 "d.status, d.createdAt, d.verifiedAt, d.updatedAt," +
                 "d.creator.employeeId.id, d.verificator.employeeId.id) " +
-                "FROM Document d WHERE d.documentNumber=:documentNumber " +
+                "from Document d where d.documentNumber=:documentNumber " +
                 "AND d.deleted = false";
         Query query = entityManager.createQuery(jpql);
         query.setParameter("documentNumber", documentNumber);
@@ -45,7 +46,10 @@ public class JPQLDocumentsCatalog implements DocumentsCatalog {
         String jpql = buildQuery(documentCriteria);
         Query query = entityManager.createQuery(jpql);
         fillStatement(documentCriteria, query);
-        return (DocumentSearchResults) query.getResultList();
+        return new DocumentSearchResults(query.getResultList(),
+                documentCriteria.getPerPage(),
+                documentCriteria.getPageNumber(),
+                0l);
     }
 
     private String buildQuery(DocumentCriteria documentCriteria) {
