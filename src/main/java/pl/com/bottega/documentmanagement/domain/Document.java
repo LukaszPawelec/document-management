@@ -17,9 +17,9 @@ public class Document {
 
     private DocumentNumber documentNumber;
 
-    private String content;
-
     private String title;
+
+    private String content;
 
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdAt, verifiedAt, updateAt;
@@ -36,10 +36,10 @@ public class Document {
     private Document() {
     }
 
-    public Document(DocumentNumber documentNumber, String content, String title, Employee creator) {
+    public Document(DocumentNumber documentNumber, String title, String content, Employee creator) {
         this.documentNumber = documentNumber;
-        this.content = content;
         this.title = title;
+        this.content = content;
         this.creator = creator;
         this.status = DocumentStatus.DRAFT;
         this.createdAt = new Date();

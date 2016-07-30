@@ -5,6 +5,7 @@ import pl.com.bottega.documentmanagement.api.DocumentDto;
 import pl.com.bottega.documentmanagement.api.DocumentFlowProcess;
 import pl.com.bottega.documentmanagement.api.DocumentsCatalog;
 import pl.com.bottega.documentmanagement.domain.DocumentNumber;
+import pl.com.bottega.documentmanagement.infrastructure.DocumentCriteria;
 
 /**
  * Created by maciuch on 03.07.16.
@@ -34,6 +35,11 @@ public class DocumentsController {
     @GetMapping("/{documentNumber}")
     public DocumentDto show(@PathVariable String documentNumber) {
         return documentsCatalog.get(new DocumentNumber(documentNumber));
+    }
+
+    @GetMapping
+    public Iterable<DocumentDto> index(DocumentCriteria documentCriteria) {
+        return documentsCatalog.find(documentCriteria);
     }
 
 }
