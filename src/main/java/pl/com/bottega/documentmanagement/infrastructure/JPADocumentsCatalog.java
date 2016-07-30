@@ -19,7 +19,7 @@ import java.util.HashSet;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Created by maciuch on 12.06.16.
+ * Created by Radżesz on 12.06.16.
  */
 @Component
 public class JPADocumentsCatalog implements DocumentsCatalog {
