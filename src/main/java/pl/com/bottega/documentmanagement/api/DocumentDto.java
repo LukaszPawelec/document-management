@@ -1,7 +1,5 @@
 package pl.com.bottega.documentmanagement.api;
 
-import pl.com.bottega.documentmanagement.domain.DocumentStatus;
-
 import java.util.Date;
 
 /**
@@ -14,57 +12,15 @@ public class DocumentDto {
     private String content;
     private String status;
     private Long creatorId, verificatorId;
-    private Date createdAt, verifiedAt, updatedAt;
+    private Date createdAt, verificatedAt, updatedAt;
 
-    public DocumentDto(String number, String title, String content, DocumentStatus status, Date createdAt, Date verifiedAt, Date updatedAt, Long creatorId, Long verificatorId) {
+    public DocumentDto(String number, String title, String content, String status, Date createdAt, Date verificatedAt, Date updatedAt) {
         this.number = number;
         this.title = title;
         this.content = content;
-        this.status = status.name();
+        this.status = status;
         this.createdAt = createdAt;
-        this.verifiedAt = verifiedAt;
-        this.updatedAt = updatedAt;
-        this.creatorId = creatorId;
-        this.verificatorId = verificatorId;
-    }
-
-    public Long getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(Long creatorId) {
-        this.creatorId = creatorId;
-    }
-
-    public Long getVerificatorId() {
-        return verificatorId;
-    }
-
-    public void setVerificatorId(Long verificatorId) {
-        this.verificatorId = verificatorId;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getVerifiedAt() {
-        return verifiedAt;
-    }
-
-    public void setVerifiedAt(Date verifiedAt) {
-        this.verifiedAt = verifiedAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
+        this.verificatedAt = verificatedAt;
         this.updatedAt = updatedAt;
     }
 
@@ -99,5 +55,4 @@ public class DocumentDto {
     public void setStatus(String status) {
         this.status = status;
     }
-
 }

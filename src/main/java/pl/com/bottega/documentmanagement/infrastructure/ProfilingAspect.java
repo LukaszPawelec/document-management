@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- * Created by Nizari on 09.07.2016.
+ * Created by maciuch on 09.07.16.
  */
 @Component
 public class ProfilingAspect {
@@ -23,10 +23,10 @@ public class ProfilingAspect {
         String msg = "Class: " +
                 proceedingJoinPoint.getTarget().getClass().getName() +
                 ", Method: " + proceedingJoinPoint.getSignature().getName() +
-                "Processing time: " + time + "ms";
+                ", Processing time: " + time + "ms";
         Logger.getLogger(ProfilingAspect.class).info(msg);
 
-        //return target method
+        // return target method return value
         return returnValue;
     }
 

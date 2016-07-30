@@ -17,12 +17,12 @@ public class Document {
 
     private DocumentNumber documentNumber;
 
-    private String title;
-
     private String content;
 
+    private String title;
+
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdAt, verifiedAt, updateAt;
+    private Date createdAt, verifiedAt, updatedAt;
 
     @Enumerated(EnumType.STRING)
     private DocumentStatus status;
@@ -36,10 +36,10 @@ public class Document {
     private Document() {
     }
 
-    public Document(DocumentNumber documentNumber, String title, String content, Employee creator) {
+    public Document(DocumentNumber documentNumber, String content, String title, Employee creator) {
         this.documentNumber = documentNumber;
-        this.title = title;
         this.content = content;
+        this.title = title;
         this.creator = creator;
         this.status = DocumentStatus.DRAFT;
         this.createdAt = new Date();
@@ -49,7 +49,7 @@ public class Document {
         this.title = title;
         this.content = content;
         this.status = DocumentStatus.DRAFT;
-        this.updateAt = new Date();
+        this.updatedAt = new Date();
     }
 
     public void verify(Employee employee) {

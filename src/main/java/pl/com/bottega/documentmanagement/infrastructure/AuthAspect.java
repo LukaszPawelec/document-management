@@ -5,9 +5,9 @@ import pl.com.bottega.documentmanagement.api.AuthRequiredException;
 import pl.com.bottega.documentmanagement.api.UserManager;
 
 /**
- * Created by Nizari on 09.07.2016.
+ * Created by maciuch on 09.07.16.
  */
-@Component("authAspect")
+@Component
 public class AuthAspect {
 
     private UserManager userManager;
@@ -20,4 +20,5 @@ public class AuthAspect {
         if (!userManager.isAuthenticated())
             throw new AuthRequiredException();
     }
+
 }

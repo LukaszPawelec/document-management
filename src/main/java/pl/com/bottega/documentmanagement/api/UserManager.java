@@ -12,7 +12,7 @@ import pl.com.bottega.documentmanagement.domain.EmployeeId;
 import pl.com.bottega.documentmanagement.domain.repositories.EmployeeRepository;
 
 /**
- * Created by Nizari on 12.06.16.
+ * Created by maciuch on 12.06.16.
  */
 @Service
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)

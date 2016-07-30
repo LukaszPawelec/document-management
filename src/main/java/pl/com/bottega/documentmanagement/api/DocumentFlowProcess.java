@@ -35,7 +35,6 @@ public class DocumentFlowProcess {
         DocumentNumber documentNumber = documentNumberGenerator.generate();
         Document document = new Document(documentNumber, title, content, userManager.currentEmployee());
         documentRepository.save(document);
-
         return documentNumber;
     }
 
