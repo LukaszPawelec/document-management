@@ -5,7 +5,7 @@ import com.google.common.hash.Hashing;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by Nizari on 31.07.2016.
+ * Created by maciuch on 31.07.16.
  */
 @Service
 public class PasswordHasher {

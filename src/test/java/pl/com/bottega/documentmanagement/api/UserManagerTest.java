@@ -8,12 +8,12 @@ import pl.com.bottega.documentmanagement.domain.Employee;
 import pl.com.bottega.documentmanagement.domain.EmployeeId;
 import pl.com.bottega.documentmanagement.domain.repositories.EmployeeRepository;
 
-import static junit.framework.TestCase.*;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Nizari on 31.07.2016.
+ * Created by maciuch on 31.07.16.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class UserManagerTest {

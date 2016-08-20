@@ -1,7 +1,5 @@
 package pl.com.bottega.documentmanagement.domain;
 
-import pl.com.bottega.documentmanagement.api.DocumentDto;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;

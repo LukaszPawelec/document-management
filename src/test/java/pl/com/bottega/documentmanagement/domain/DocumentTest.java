@@ -7,11 +7,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Date;
 
-import static junit.framework.TestCase.*;
-import static org.junit.Assert.assertTrue;
+import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 /**
- * Created by Nizari on 31.07.2016.
+ * Created by maciuch on 31.07.16.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class DocumentTest {
@@ -26,23 +27,22 @@ public class DocumentTest {
 
     private String anyTitle = "test title";
 
-    private static Long EPS =  2L * 1000L;
+    private static Long EPS = 2L * 1000L;
 
     @Test
     public void shouldCreateDocumentWithInitialState() {
-        //given
+        // given
 
-        //when
+        // when
         Document document = new Document(anyNumber, anyContent, anyTitle, anyEmployee);
 
-        //then
+        // then
         assertEquals(anyNumber, document.number());
         assertEquals(anyContent, document.content());
         assertEquals(anyTitle, document.title());
         assertEquals(anyEmployee, document.creator());
         assertFalse(document.deleted());
         assertEquals(DocumentStatus.DRAFT, document.status());
-
     }
 
     @Test
@@ -54,11 +54,9 @@ public class DocumentTest {
         document.verify(anyEmployee);
 
         //then
-        assertNotNull(document.verifiedAt());
         assertTrue(Math.abs(new Date().getTime() - document.verifiedAt().getTime()) < EPS);
         assertEquals(DocumentStatus.VERIFIED, document.status());
         assertEquals(anyEmployee, document.verificator());
-
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -66,11 +64,8 @@ public class DocumentTest {
         //given
         Document document = new Document(anyNumber, anyContent, anyTitle, anyEmployee);
 
-        //when
+        // when
         document.verify(null);
-
-        //then
-
 
     }
 
@@ -79,18 +74,14 @@ public class DocumentTest {
         //given
         Document document = new Document(anyNumber, anyContent, anyTitle, anyEmployee);
 
-        //when
+        // when
         try {
             document.verify(null);
         }
-        catch (IllegalArgumentException ex) {
+        catch(IllegalArgumentException ex) {
             return;
         }
         fail("IllegalArgumentException expected");
-
-        //then
-
-
     }
 
 }
