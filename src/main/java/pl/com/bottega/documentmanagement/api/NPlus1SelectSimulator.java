@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by maciuch on 30.07.16.
+ * Created by Radżesz on 30.07.16.
  */
 @Service
 public class NPlus1SelectSimulator {
@@ -26,7 +26,7 @@ public class NPlus1SelectSimulator {
         entityManager.persist(employee);
         for(int i = 0; i < 1000; i++) {
             Document d = new Document(
-                new DocumentNumber(randomString()), randomString(), randomString(), employee
+                    new DocumentNumber(randomString()), randomString(), randomString(), employee
             );
             d.tag(Sets.newHashSet(new Tag("one"), new Tag("two"), new Tag("three")));
             entityManager.persist(d);
@@ -36,7 +36,7 @@ public class NPlus1SelectSimulator {
 
     @Transactional
     public void simulate() {
-        Query query = entityManager.createQuery("FROM Document d JOIN FETCH d.tags", Document.class);
+        Query query = entityManager.createQuery("FROM Document d JOIN fetch d.tags", Document.class).setMaxResults(10);
         List<Document> docuemnts = query.getResultList();
         for(Document d : docuemnts) {
             System.out.print(d.toString() + " ");
@@ -45,6 +45,16 @@ public class NPlus1SelectSimulator {
             }
             System.out.println();
         }
+    }
+
+    @Transactional
+    public Document getDocument() {
+        Query query = entityManager.createQuery("FROM Document d");
+        query.setMaxResults(1);
+        Document d = (Document) query.getResultList().get(0);
+        System.out.println(d.verificator().toString());
+        System.out.println(d.tags().size());
+        return d;
     }
 
     private String randomString() {
